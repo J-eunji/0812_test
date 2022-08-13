@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
-export default function Header({ state }) {
+export default function Header({ todoList }) {
   const todayDate = new Date().toLocaleDateString("ko-KR", {
     dateStyle: "full",
   });
 
-  const count = state.todoList.filter((todo) => todo.id).length;
+  // filter는 Array에 적용되는 함수!!!! (map도 마찬가지)
+  // 쓸거면 todoList를 Array로 만들어야 함.
+  const count = todoList.filter((todo) => !todo.done).length;
 
   return (
     <HeaderBox>

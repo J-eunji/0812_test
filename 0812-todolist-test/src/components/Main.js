@@ -1,20 +1,23 @@
 import { FaTrashAlt } from "react-icons/fa";
 import styled, { css } from "styled-components";
 
-export default function Main({ state, onToggle, onRemove }) {
-  const TextList = state.todoList.map((todo) => (
+export default function Main({ todoList, onToggle, onRemove }) {
+  const TextList = todoList.map((todo) => (
     <Item key={"item"} onClick={() => onToggle()}>
       {todo.text}
-      <FaTrashAlt
-        onClick={(e) => {
-          e.preventDefault();
-          onRemove();
-        }}
-      />
+      <div>
+        <FaTrashAlt
+          size={17}
+          onClick={(e) => {
+            // preventDefalut는 함수니까 ()호출을 꼭 해주자
+            e.preventDefault();
+            onRemove(todo.id);
+          }}
+        />
+      </div>
     </Item>
   ));
-  // const done = state.todoList.map((todo) => todo.done);
-  return <ListBox key={"hahaha"}>{TextList}</ListBox>;
+  return <ListBox>{TextList}</ListBox>;
 }
 
 const ListBox = styled.div`
@@ -23,9 +26,10 @@ const ListBox = styled.div`
   align-items: flex-start;
   flex: 1;
   width: 100%;
+  overflow-y: scroll;
 `;
 
-const Item = styled.div`
+const Item = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,4 +44,13 @@ const Item = styled.div`
       text-decoration: line-through;
       color: lightgray;
     `}
+  li {
+    width: 100%;
+  }
+  div {
+    opacity: 0.1;
+    &:hover {
+      opacity: 1;
+    }
+  }
 `;
