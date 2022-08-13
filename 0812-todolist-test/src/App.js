@@ -10,7 +10,7 @@ function App() {
     todoList: [
       {
         id: 1,
-        text: "첫 번째 할 일",
+        text: "클릭하면 할 일 완료!",
         done: false,
       },
     ],
