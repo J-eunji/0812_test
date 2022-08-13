@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 
 export default function Main({ todoList, onToggle, onRemove }) {
   const TextList = todoList.map((todo) => (
-    <Item key={"item"} onClick={() => onToggle()}>
-      {todo.text}
+    <Item key={"item"} onClick={() => onToggle(todo.id)} done={todo.done}>
+      <li>{todo.text}</li>
       <div>
         <FaTrashAlt
           size={17}
@@ -38,14 +38,13 @@ const Item = styled.ul`
   border-bottom: lightgray 1px solid;
   cursor: pointer;
   user-select: none;
-  ${({ done }) =>
-    done &&
-    css`
-      text-decoration: line-through;
-      color: lightgray;
-    `}
   li {
-    width: 100%;
+    ${({ done }) =>
+      done &&
+      css`
+        text-decoration: line-through;
+        color: lightgray;
+      `}
   }
   div {
     opacity: 0.1;
